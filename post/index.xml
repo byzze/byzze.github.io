@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Hugo Tania</title>
-    <link>https://example.com/post/</link>
-    <description>Recent content in Posts on Hugo Tania</description>
+    <title>Posts on RidLuo</title>
+    <link>https://ridluo.github.io/post/</link>
+    <description>Recent content in Posts on RidLuo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 31 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Nov 2022 16:20:35 +0800</lastBuildDate><atom:link href="https://ridluo.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>First</title>
+      <link>https://ridluo.github.io/post/first/</link>
+      <pubDate>Fri, 11 Nov 2022 16:20:35 +0800</pubDate>
+      
+      <guid>https://ridluo.github.io/post/first/</guid>
+      <description>第一个博客网站 下载hugo 确保已经安装了go语言环境 在终端执行命令go install github.com/gohugoio/hugo@latest 安装成功 创建网站，引入主题 mkdir ~/hugo cd ~/hugo hugo new site blog cd blog git submodule add &amp;lt;https://github.com/WingLim/hugo-tania&amp;gt; themes/hugo-tania 步骤git submodule 执行失败两点问题
+https请求修改为项目的git@请求 在个人github创建对应仓库 blog ，初始化，push相关操作 参考地址：https://themes.gohugo.io/themes/hugo-tania/ 启动服务 hugo server 访问地址 http://localhost:1313/
+部署github hugo cd public git init git remote add origin https://github.com/username/username.github.io.git git add -A git commit -m &amp;#34;first commit&amp;#34; git push -u origin master 若https的github不能正常访问，改用git@github.com:username/username.github.io.git</description>
+    </item>
+    
     <item>
       <title>Footnote test</title>
-      <link>https://example.com/post/footnote/</link>
+      <link>https://ridluo.github.io/post/footnote/</link>
       <pubDate>Mon, 31 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/post/footnote/</guid>
+      <guid>https://ridluo.github.io/post/footnote/</guid>
       <description>Lorem ipsum dolor sit amet1 consectetur adipisicing elit. Nemo tempora eum cumque neque voluptatum, odit ipsum consequatur animi.
 Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo tempora eum cumque neque voluptatum, odit ipsum2 consequatur animi.
 Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo tempora eum cumque neque voluptatum, odit ipsum consequatur animi.
@@ -21,10 +32,10 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo tempora eum cumque
     
     <item>
       <title>Katex support</title>
-      <link>https://example.com/post/test-katex/</link>
+      <link>https://ridluo.github.io/post/test-katex/</link>
       <pubDate>Sat, 22 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/post/test-katex/</guid>
+      <guid>https://ridluo.github.io/post/test-katex/</guid>
       <description>The following
 $$ \int_{a}^{b} x^2 dx $$
 Is an integral
@@ -37,10 +48,10 @@ See the online reference of supported TeX functions.
     
     <item>
       <title>MathJax support</title>
-      <link>https://example.com/post/test-mathjax/</link>
+      <link>https://ridluo.github.io/post/test-mathjax/</link>
       <pubDate>Sat, 22 May 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/post/test-mathjax/</guid>
+      <guid>https://ridluo.github.io/post/test-mathjax/</guid>
       <description>The following
 $$ \int_{a}^{b} x^2 dx $$
 Is an integral
@@ -52,37 +63,37 @@ Enable MathJax in the config file by setting the mathjax param to true. This wil
     
     <item>
       <title>Markdown Syntax Guide</title>
-      <link>https://example.com/post/markdown-syntax/</link>
+      <link>https://ridluo.github.io/post/markdown-syntax/</link>
       <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/post/markdown-syntax/</guid>
+      <guid>https://ridluo.github.io/post/markdown-syntax/</guid>
       <description>&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Example Lazy Load Image</title>
-      <link>https://example.com/post/example-lazy-load-image/</link>
+      <link>https://ridluo.github.io/post/example-lazy-load-image/</link>
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/post/example-lazy-load-image/</guid>
+      <guid>https://ridluo.github.io/post/example-lazy-load-image/</guid>
       <description>Nya nya nyan meow meow mama More napping, more napping all the napping is exhausting stretch out on bed you are a captive audience while sitting on the toilet, pet me slap the dog because cats rule bleghbleghvomit my furball really tie the room together always hungry. Humans,humans, humans oh how much they love us felines we are the center of attention they feed, they clean miaow then turn around and show you my bum.</description>
     </item>
     
     <item>
       <title>Placeholder Text</title>
-      <link>https://example.com/post/placeholder-text/</link>
+      <link>https://ridluo.github.io/post/placeholder-text/</link>
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/post/placeholder-text/</guid>
+      <guid>https://ridluo.github.io/post/placeholder-text/</guid>
       <description>&lt;p&gt;Lorem est tota propiore conpellat pectoribus de pectora summo.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Emoji Support</title>
-      <link>https://example.com/post/emoji-support/</link>
+      <link>https://ridluo.github.io/post/emoji-support/</link>
       <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/post/emoji-support/</guid>
+      <guid>https://ridluo.github.io/post/emoji-support/</guid>
       <description>&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;</description>
     </item>
     

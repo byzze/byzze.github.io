@@ -1,17 +1,110 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hugo Tania</title>
-    <link>https://example.com/</link>
-    <description>Recent content on Hugo Tania</description>
+    <title>RidLuo</title>
+    <link>https://ridluo.github.io/</link>
+    <description>Recent content on RidLuo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 31 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Nov 2022 16:20:35 +0800</lastBuildDate><atom:link href="https://ridluo.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+    <title>First</title>
+    <link>https://ridluo.github.io/post/first/</link>
+    <pubDate>Fri, 11 Nov 2022 16:20:35 +0800</pubDate>
+    
+    <guid>https://ridluo.github.io/post/first/</guid>
+    <description>
+        &lt;h1 id=&#34;第一个博客网站&#34;&gt;
+    &lt;a href=&#34;#%e7%ac%ac%e4%b8%80%e4%b8%aa%e5%8d%9a%e5%ae%a2%e7%bd%91%e7%ab%99&#34; class=&#34;anchor&#34;&gt;
+        &lt;svg class=&#34;icon&#34; aria-hidden=&#34;true&#34; focusable=&#34;false&#34; height=&#34;16&#34; version=&#34;1.1&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34;&gt;
+            &lt;path fill-rule=&#34;evenodd&#34;
+                d=&#34;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&#34;&gt;
+            &lt;/path&gt;
+        &lt;/svg&gt;
+    &lt;/a&gt;
+    第一个博客网站
+&lt;/h1&gt;
+&lt;h2 id=&#34;下载hugo&#34;&gt;
+    &lt;a href=&#34;#%e4%b8%8b%e8%bd%bdhugo&#34; class=&#34;anchor&#34;&gt;
+        &lt;svg class=&#34;icon&#34; aria-hidden=&#34;true&#34; focusable=&#34;false&#34; height=&#34;16&#34; version=&#34;1.1&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34;&gt;
+            &lt;path fill-rule=&#34;evenodd&#34;
+                d=&#34;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&#34;&gt;
+            &lt;/path&gt;
+        &lt;/svg&gt;
+    &lt;/a&gt;
+    下载hugo
+&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;确保已经安装了&lt;code&gt;go&lt;/code&gt;语言环境&lt;/li&gt;
+&lt;li&gt;在终端执行命令&lt;code&gt;go install github.com/gohugoio/hugo@latest&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;安装成功&lt;/li&gt;
+&lt;li&gt;&lt;img loading=&#34;lazy&#34; 
+    src=&#34;https://ridluo.github.io/images/hugo-1.png&#34; 
+    alt=&#34;&amp;lt;code&amp;gt;安装成功&amp;lt;/code&amp;gt;&#34; 
+     
+    width=337 
+    height=&#34;42&#34;  /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;创建网站引入主题&#34;&gt;
+    &lt;a href=&#34;#%e5%88%9b%e5%bb%ba%e7%bd%91%e7%ab%99%e5%bc%95%e5%85%a5%e4%b8%bb%e9%a2%98&#34; class=&#34;anchor&#34;&gt;
+        &lt;svg class=&#34;icon&#34; aria-hidden=&#34;true&#34; focusable=&#34;false&#34; height=&#34;16&#34; version=&#34;1.1&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34;&gt;
+            &lt;path fill-rule=&#34;evenodd&#34;
+                d=&#34;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&#34;&gt;
+            &lt;/path&gt;
+        &lt;/svg&gt;
+    &lt;/a&gt;
+    创建网站，引入主题
+&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mkdir ~/hugo
+cd ~/hugo
+hugo new site blog
+cd blog 
+git submodule add &amp;lt;https://github.com/WingLim/hugo-tania&amp;gt; themes/hugo-tania
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;步骤git submodule 执行失败两点问题&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;https请求修改为项目的git@请求&lt;/li&gt;
+&lt;li&gt;在个人github创建对应仓库 blog ，初始化，push相关操作
+参考地址：&lt;a href=&#34;https://themes.gohugo.io/themes/hugo-tania/&#34;&gt;https://themes.gohugo.io/themes/hugo-tania/&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;启动服务&#34;&gt;
+    &lt;a href=&#34;#%e5%90%af%e5%8a%a8%e6%9c%8d%e5%8a%a1&#34; class=&#34;anchor&#34;&gt;
+        &lt;svg class=&#34;icon&#34; aria-hidden=&#34;true&#34; focusable=&#34;false&#34; height=&#34;16&#34; version=&#34;1.1&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34;&gt;
+            &lt;path fill-rule=&#34;evenodd&#34;
+                d=&#34;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&#34;&gt;
+            &lt;/path&gt;
+        &lt;/svg&gt;
+    &lt;/a&gt;
+    启动服务
+&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hugo server
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;访问地址 &lt;code&gt;http://localhost:1313/&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;部署github&#34;&gt;
+    &lt;a href=&#34;#%e9%83%a8%e7%bd%b2github&#34; class=&#34;anchor&#34;&gt;
+        &lt;svg class=&#34;icon&#34; aria-hidden=&#34;true&#34; focusable=&#34;false&#34; height=&#34;16&#34; version=&#34;1.1&#34; viewBox=&#34;0 0 16 16&#34; width=&#34;16&#34;&gt;
+            &lt;path fill-rule=&#34;evenodd&#34;
+                d=&#34;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&#34;&gt;
+            &lt;/path&gt;
+        &lt;/svg&gt;
+    &lt;/a&gt;
+    部署github
+&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hugo 
+cd public
+git init
+git remote add origin https://github.com/username/username.github.io.git
+git add -A
+git commit -m &amp;#34;first commit&amp;#34;
+git push -u origin master
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;若https的github不能正常访问，改用git@github.com:username/username.github.io.git&lt;/p&gt;
+
+    </description>
+    </item>
+    
     <item>
     <title>Footnote test</title>
-    <link>https://example.com/post/footnote/</link>
+    <link>https://ridluo.github.io/post/footnote/</link>
     <pubDate>Mon, 31 May 2021 00:00:00 +0000</pubDate>
     
-    <guid>https://example.com/post/footnote/</guid>
+    <guid>https://ridluo.github.io/post/footnote/</guid>
     <description>
         &lt;p&gt;Lorem ipsum dolor sit amet&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; consectetur adipisicing elit. Nemo tempora eum cumque neque voluptatum, odit ipsum consequatur animi.&lt;/p&gt;
 &lt;p&gt;Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo tempora eum cumque neque voluptatum, odit ipsum&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; consequatur animi.&lt;/p&gt;
@@ -34,10 +127,10 @@
     
     <item>
     <title>Katex support</title>
-    <link>https://example.com/post/test-katex/</link>
+    <link>https://ridluo.github.io/post/test-katex/</link>
     <pubDate>Sat, 22 May 2021 00:00:00 +0000</pubDate>
     <author>Hugo Authors</author>
-    <guid>https://example.com/post/test-katex/</guid>
+    <guid>https://ridluo.github.io/post/test-katex/</guid>
     <description>
         &lt;p&gt;The following&lt;/p&gt;
 &lt;p&gt;$$ \int_{a}^{b} x^2 dx $$&lt;/p&gt;
@@ -74,10 +167,10 @@
     
     <item>
     <title>MathJax support</title>
-    <link>https://example.com/post/test-mathjax/</link>
+    <link>https://ridluo.github.io/post/test-mathjax/</link>
     <pubDate>Sat, 22 May 2021 00:00:00 +0000</pubDate>
     <author>Hugo Authors</author>
-    <guid>https://example.com/post/test-mathjax/</guid>
+    <guid>https://ridluo.github.io/post/test-mathjax/</guid>
     <description>
         &lt;p&gt;The following&lt;/p&gt;
 &lt;p&gt;$$ \int_{a}^{b} x^2 dx $$&lt;/p&gt;
@@ -113,10 +206,10 @@
     
     <item>
     <title>Markdown Syntax Guide</title>
-    <link>https://example.com/post/markdown-syntax/</link>
+    <link>https://ridluo.github.io/post/markdown-syntax/</link>
     <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
     <author>Hugo Authors</author>
-    <guid>https://example.com/post/markdown-syntax/</guid>
+    <guid>https://ridluo.github.io/post/markdown-syntax/</guid>
     <description>
         &lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;
 &lt;h2 id=&#34;headings&#34;&gt;
@@ -492,10 +585,10 @@
     
     <item>
     <title>Example Lazy Load Image</title>
-    <link>https://example.com/post/example-lazy-load-image/</link>
+    <link>https://ridluo.github.io/post/example-lazy-load-image/</link>
     <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
     <author>Hugo Authors</author>
-    <guid>https://example.com/post/example-lazy-load-image/</guid>
+    <guid>https://ridluo.github.io/post/example-lazy-load-image/</guid>
     <description>
         &lt;h2 id=&#34;nya-nya-nyan-meow-meow-mama&#34;&gt;
     &lt;a href=&#34;#nya-nya-nyan-meow-meow-mama&#34; class=&#34;anchor&#34;&gt;
@@ -575,10 +668,10 @@
     
     <item>
     <title>Placeholder Text</title>
-    <link>https://example.com/post/placeholder-text/</link>
+    <link>https://ridluo.github.io/post/placeholder-text/</link>
     <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
     <author>Hugo Authors</author>
-    <guid>https://example.com/post/placeholder-text/</guid>
+    <guid>https://ridluo.github.io/post/placeholder-text/</guid>
     <description>
         &lt;p&gt;Lorem est tota propiore conpellat pectoribus de pectora summo.&lt;/p&gt;
 &lt;p&gt;Redit teque digerit hominumque toris verebor lumina non cervice subde tollit usus habet Arctonque, furores quas nec ferunt. Quoque montibus nunc caluere tempus inhospita parcite confusaque translucet patri vestro qui optatis lumine cognoscere flos nubis! Fronde ipsamque patulos Dryopen deorum.&lt;/p&gt;
@@ -626,10 +719,10 @@
     
     <item>
     <title>Emoji Support</title>
-    <link>https://example.com/post/emoji-support/</link>
+    <link>https://ridluo.github.io/post/emoji-support/</link>
     <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
     <author>Hugo Authors</author>
-    <guid>https://example.com/post/emoji-support/</guid>
+    <guid>https://ridluo.github.io/post/emoji-support/</guid>
     <description>
         &lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;
 &lt;p&gt;The &lt;a href=&#34;https://gohugo.io/functions/emojify/&#34;&gt;&lt;code&gt;emojify&lt;/code&gt;&lt;/a&gt; function can be called directly in templates or &lt;a href=&#34;https://gohugo.io/templates/shortcode-templates/#inline-shortcodes&#34;&gt;Inline Shortcodes&lt;/a&gt;.&lt;/p&gt;
