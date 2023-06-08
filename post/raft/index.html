@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="theme-color" content="dark">
+    <title>理解Raft协议 | Byzze</title>
+
+    
+    
+    
+    <meta property="og:site_name" content="Byzze is Amazing" />
+    <meta property="og:title" content="理解Raft协议 | Byzze"/>
+    <meta itemprop="name" content="理解Raft协议 | Byzze" />
+    <meta name="twitter:title" content="理解Raft协议 | Byzze" />
+    <meta name="application-name" content="理解Raft协议 | Byzze" /><meta name="twitter:card" content="summary"/>
+
+    <meta name="description" content="Hugo is Absurdly Fast!" />
+    <meta name="twitter:description" content="Hugo is Absurdly Fast!"/>
+    <meta itemprop="description" content="Hugo is Absurdly Fast!"/>
+    <meta property="og:description" content="Hugo is Absurdly Fast!" />
+
+    
+
+<meta property="og:type" content="article" />
+<meta property="article:publisher" content="Byzze" />
+<meta property="og:article:published_time" content=2023-06-08T11:00:05&#43;0800 />
+<meta property="article:published_time" content=2023-06-08T11:00:05&#43;0800 />
+
+
+
+
+
+<script defer type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "理解Raft协议",
+    "author": {
+      "@type": "Person",
+      "name": "Byzze"
+    },
+    "datePublished": "2023-06-08",
+    "description": "",
+    "wordCount":  73 ,
+    "mainEntityOfPage": "True",
+    "dateModified": "2023-06-08",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Byzze",
+      "logo": {
+        "@type": "imageObject",
+        "url": "https:\/\/byzze.github.io\/favicon.ico"
+      }
+    }
+  }
+</script>
+
+
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    
+    <link rel="stylesheet" href="/sass/main.min.025aa48bdfc11d4031bca69d66f534d1b6874ba6a9ddaddbbe75e090b28bb672.css">
+    
+</head>
+    
+    <script>
+        (function() {
+            const colorSchemeKey = 'ThemeColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'ThemeColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.userColorScheme = 'dark';
+        } else {
+            document.documentElement.dataset.userColorScheme = 'light';
+        }
+    })();
+</script>
+
+
+    <body class="dark">
+        <nav class="navbar">
+    <div class="container">
+        <div class="flex">
+            <div>
+                <a class="brand" href="/">
+                    
+                    <span class="emoji">
+                        😎
+                    </span>
+                    
+                    
+                        <img src="/favicon.ico" />
+                    
+                    Byzze
+                    </a>
+            </div>
+            <div class="flex">
+                
+                <a href="/about/">About</a>
+                
+                <a href="/articles/">Articles</a>
+                
+                <a href="/">HOME</a>
+                
+                
+                    <button id="dark-mode-button">
+                    <svg class="light" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36"><path fill="#FFD983" d="M30.312.776C32 19 20 32 .776 30.312c8.199 7.717 21.091 7.588 29.107-.429C37.9 21.867 38.03 8.975 30.312.776z"/><path d="M30.705 15.915a1.163 1.163 0 1 0 1.643 1.641a1.163 1.163 0 0 0-1.643-1.641zm-16.022 14.38a1.74 1.74 0 0 0 0 2.465a1.742 1.742 0 1 0 0-2.465zm13.968-2.147a2.904 2.904 0 0 1-4.108 0a2.902 2.902 0 0 1 0-4.107a2.902 2.902 0 0 1 4.108 0a2.902 2.902 0 0 1 0 4.107z" fill="#FFCC4D"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)" /></svg>
+                    <svg class="dark" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 36 36"><path fill="#FFD983" d="M16 2s0-2 2-2s2 2 2 2v2s0 2-2 2s-2-2-2-2V2zm18 14s2 0 2 2s-2 2-2 2h-2s-2 0-2-2s2-2 2-2h2zM4 16s2 0 2 2s-2 2-2 2H2s-2 0-2-2s2-2 2-2h2zm5.121-8.707s1.414 1.414 0 2.828s-2.828 0-2.828 0L4.878 8.708s-1.414-1.414 0-2.829c1.415-1.414 2.829 0 2.829 0l1.414 1.414zm21 21s1.414 1.414 0 2.828s-2.828 0-2.828 0l-1.414-1.414s-1.414-1.414 0-2.828s2.828 0 2.828 0l1.414 1.414zm-.413-18.172s-1.414 1.414-2.828 0s0-2.828 0-2.828l1.414-1.414s1.414-1.414 2.828 0s0 2.828 0 2.828l-1.414 1.414zm-21 21s-1.414 1.414-2.828 0s0-2.828 0-2.828l1.414-1.414s1.414-1.414 2.828 0s0 2.828 0 2.828l-1.414 1.414zM16 32s0-2 2-2s2 2 2 2v2s0 2-2 2s-2-2-2-2v-2z"/><circle fill="#FFD983" cx="18" cy="18" r="10"/><rect x="0" y="0" width="36" height="36" fill="rgba(0, 0, 0, 0)" /></svg>
+                    </button>
+                
+            </div>
+            </div>
+    </div>
+</nav>
+
+        <main>
+            
+<div class="container">
+    <article>
+        <header class="article-header">
+            <div class="thumb">
+                <div>
+                    <h1>理解Raft协议</h1>
+                    <div class="post-meta">
+                        <div>
+                            
+                            
+                              
+                            
+                            By Byzze | <time>June 08, 2023</time>
+                            | 1 minutes
+                        </div>
+                        <div class="tags">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </article>
+
+    <div class="article-post">
+    <ul>
+<li><a href="#raft%E6%98%AF%E4%BB%80%E4%B9%88">Raft是什么</a></li>
+<li><a href="#%E5%85%B1%E8%AF%86%E6%98%AF%E4%BB%80%E4%B9%88">共识是什么</a></li>
+<li><a href="#cap%E7%90%86%E8%AE%BA">CAP理论</a></li>
+<li><a href="#raft%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88">Raft能做什么</a></li>
+<li><a href="#raft%E7%9A%84%E5%8E%9F%E7%90%86">Raft的原理</a>
+<ul>
+<li><a href="#leader%E9%80%89%E4%B8%BE%E6%9C%BA%E5%88%B6">Leader选举机制</a></li>
+<li><a href="#%E6%97%A5%E5%BF%97%E5%90%8C%E6%AD%A5">日志同步</a></li>
+</ul>
+</li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+<h2 id="raft是什么">
+    <a href="#raft%e6%98%af%e4%bb%80%e4%b9%88" class="anchor">
+        <svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+            <path fill-rule="evenodd"
+                d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+            </path>
+        </svg>
+    </a>
+    Raft是什么
+</h2>
+<p>Raft 是一种共识算法，旨在易于理解。它在容错性和性能方面与 Paxos 相当。不同之处在于，Raft 被分解为相对独立的子问题，并且它清晰地解决了实际系统所需的所有主要部分。目前有不少的应用都是采用Raft协议来保证集群节点一致性，比如ectd，consul</p>
+<h2 id="共识是什么">
+    <a href="#%e5%85%b1%e8%af%86%e6%98%af%e4%bb%80%e4%b9%88" class="anchor">
+        <svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+            <path fill-rule="evenodd"
+                d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+            </path>
+        </svg>
+    </a>
+    共识是什么
+</h2>
+<p>共识通常出现在复制状态机的背景下，这是构建容错系统的一种通用方法。每个服务器都有一个状态机和一个日志。状态机是我们想要使其容错的组件，例如散列表。对于客户端来说，他们将与一个可靠的单个状态机进行交互，即使群集中的一小部分服务器发生故障。每个状态机从其日志中接受命令作为输入。在我们的散列表示例中，日志将包括像将 x 设置为 3 的命令。共识算法用于在服务器的日志中达成命令的一致。共识算法必须确保如果任何一个状态机将第 n 个命令设置 x 为 3，那么没有其他状态机将会应用不同的第 n 个命令。因此，每个状态机处理相同的一系列命令，从而产生相同的一系列结果并到达相同的一系列状态。</p>
+<p>即共识在分布式系统下通过复制log的机制，相互通信，确保多台机器下的数据一致性</p>
+<h2 id="cap理论">
+    <a href="#cap%e7%90%86%e8%ae%ba" class="anchor">
+        <svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+            <path fill-rule="evenodd"
+                d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+            </path>
+        </svg>
+    </a>
+    CAP理论
+</h2>
+<p>CAP理论是指分布式系统中，一致性（Consistency）、可用性（Availability）、分区容错性（Partition Tolerance）三者只能满足其中的两个，无法同时满足三个特性。该理论由加州大学伯克利分校的计算机科学家Eric Brewer于2000年提出。</p>
+<p>一致性指的是分布式系统中的所有节点，在同一时刻看到的数据都应该是一致的。可用性则指的是分布式系统应该保证在任何时候都能够对外提供服务，而分区容错性则是指分布式系统在遭遇网络分区的情况下，仍然能够保持数据的一致性和可用性。</p>
+<p>CAP理论认为，在一个分布式系统中，由于网络不可靠或节点故障等原因，系统可能会遭受分区的情况。因此，在这种情况下，我们必须要舍弃一些特性，以保证系统的可用性以及一致性。</p>
+<p>在实际开发中，选择一致性、可用性、分区容错性中的两个，将会依据项目本身的需求。例如，针对分布式缓存系统，对于短时间内的数据不一致可以容忍，可用性和分区容错性显得尤为重要；而对于金融行业的分布式交易系统，则需要最高级的数据一致性保障。</p>
+<h2 id="raft能做什么">
+    <a href="#raft%e8%83%bd%e5%81%9a%e4%bb%80%e4%b9%88" class="anchor">
+        <svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+            <path fill-rule="evenodd"
+                d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+            </path>
+        </svg>
+    </a>
+    Raft能做什么
+</h2>
+<p>通过Raft可以用来构建容错系统。在一个容错系统中，如果有一些节点出现故障，仍然可以保证系统正常运行。Raft协议可以用来确保分布式系统中的每个节点都拥有相同的状态。</p>
+<h2 id="raft的原理">
+    <a href="#raft%e7%9a%84%e5%8e%9f%e7%90%86" class="anchor">
+        <svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+            <path fill-rule="evenodd"
+                d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+            </path>
+        </svg>
+    </a>
+    Raft的原理
+</h2>
+<p>Raft将一个节点分为三中状态</p>
+<ul>
+<li>Leader：接受客户端请求，并向Follower同步请求日志，当日志同步到大多数节点上后高速Follower提交日志。</li>
+<li>Follower：接受并持久化Leader同步的日志，在Leader告知日志可以提交后，提交日志。当Leader出现故障时，主动推荐自己为候选人。</li>
+<li>Candidate：Leader选举过程中的临时角色。向其他节点发送请求投票信息，如果获得大多数选票，则晋升为Leader。</li>
+</ul>
+<h3 id="leader选举机制">
+    <a href="#leader%e9%80%89%e4%b8%be%e6%9c%ba%e5%88%b6" class="anchor">
+        <svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+            <path fill-rule="evenodd"
+                d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+            </path>
+        </svg>
+    </a>
+    Leader选举机制
+</h3>
+<ol>
+<li>
+<p>所有的节点一开始处于选举时间（随机超时时间），处于Follower状态
+<img loading="lazy" 
+    src="/images/raft/start.png" 
+    alt="开始状态" 
+     
+    width=425 
+    height="403"  /></p>
+</li>
+<li>
+<p>当其中一个节点先到完成选择时间时，将由Follower转为Candidate，并向其他节点请求投票，投票自己成为Leader，当收到的投票数超过了半数（Candidate/2+1）,则可以转换为Leader，任期（Term）数为2
+<img loading="lazy" 
+    src="/images/raft/b.png" 
+    alt="选举Leader" 
+     
+    width=424 
+    height="396"  /></p>
+</li>
+<li>
+<p>成为Leader之后，会持续周期性向其他节点发送heartbeat
+<img loading="lazy" 
+    src="/images/raft/c.png" 
+    alt="心跳机制" 
+     
+    width=449 
+    height="398"  /></p>
+</li>
+<li>
+<p>当Follower收到heartbeat后，会重置选举时间，如果在执行完选举时间时，还未收到heartbeat，则Follower就会转为Candidate，重新进入选举Leader，并增加任期（Term）数
+<img loading="lazy" 
+    src="/images/raft/d.png" 
+    alt="重新选举" 
+     
+    width=438 
+    height="404"  /></p>
+</li>
+<li>
+<p>原来的Leader恢复状态之后，收到了新Leader的heartbeat，通过任期数（Term）判断已经产生了新的Leader，就会将自己的状态由Leader转为Follower
+<img loading="lazy" 
+    src="/images/raft/e.png" 
+    alt="恢复Follower" 
+     
+    width=444 
+    height="387"  /></p>
+</li>
+</ol>
+<h3 id="日志同步">
+    <a href="#%e6%97%a5%e5%bf%97%e5%90%8c%e6%ad%a5" class="anchor">
+        <svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+            <path fill-rule="evenodd"
+                d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+            </path>
+        </svg>
+    </a>
+    日志同步
+</h3>
+<p><strong>Raft算法实现日志同步的具体过程如下：</strong></p>
+<ol>
+<li>Leader处理客户端的请求，将数据封装，并追加到自己的日志中
+<img loading="lazy" 
+    src="/images/raft/f.png" 
+    alt="客户端请求" 
+     
+    width=939 
+    height="435"  /></li>
+<li>Leader并行地向系统中所有节点发送日志复制消息
+<img loading="lazy" 
+    src="/images/raft/g.png" 
+    alt="并行同步数据" 
+     
+    width=830 
+    height="491"  /></li>
+<li>接收到消息的节点确认消息没有问题，则将数据追加到自己的日志中，并向Leader返回ACK表示接收成功
+<img loading="lazy" 
+    src="/images/raft/h.png" 
+    alt="节点接收成功" 
+     
+    width=996 
+    height="541"  /></li>
+<li>Leader若在随机超时时间内收到大多数节点的ACK,，将该数据应用到状态机并向客户端返回成功
+<img loading="lazy" 
+    src="/images/raft/i.png" 
+    alt="大多数节点接收成功" 
+     
+    width=1009 
+    height="522"  /></li>
+</ol>
+<h2 id="总结">
+    <a href="#%e6%80%bb%e7%bb%93" class="anchor">
+        <svg class="icon" aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16">
+            <path fill-rule="evenodd"
+                d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z">
+            </path>
+        </svg>
+    </a>
+    总结
+</h2>
+<ol>
+<li>选举Leader时，采用了随机超时时间控制，先超时的先进入Candidate竞选Leader，但是如果出现了相同时间进入Candidate，且获取的选票一致时，则会重新进入竞选状态。</li>
+<li>选举倒计时timeout通常是 150ms ~ 300ms 直接的某个随机值</li>
+<li>在集群中如果出现了脑裂问题时，出现了网络分区，会出现多个Leader，但是由于分区导致始终有一个Leader所在的分区节点数占大部分，其余Leader所在节点处于小部分，从而导致处于小部分节点分区的Leader得不到大部分节点的ACK响应，数据无法正常Commit。直到网络正常时，多个Leader出现的时候，对比他们的term即任期（上面的步长），新的为Leader，之前小部分Leader未提交的数据则都会被舍弃，关于为什么要舍弃这些数据，需要使用CAP理论解释。</li>
+<li>数据的流向只能从 Leader 节点向 Follower 节点转移</li>
+<li>数据在大多数节点提交后才commit，并向客户端响应成功</li>
+</ol>
+<p><strong>参考链接</strong></p>
+<ul>
+<li><a href="https://juejin.cn/post/7143541597165060109">https://juejin.cn/post/7143541597165060109</a></li>
+<li><a href="http://thesecretlivesofdata.com/raft/">http://thesecretlivesofdata.com/raft/</a></li>
+<li><a href="https://here2say.com/44/">https://here2say.com/44/</a></li>
+<li><a href="https://raft.github.io/">https://raft.github.io/</a></li>
+</ul>
+
+    </div>
+</div>
+
+<div class="container">
+    
+    <nav class="flex container suggested">
+        
+        <a rel="prev" href="/post/wireshark%E5%85%A5%E9%97%A8/" title="Previous post (older)">
+            <span>Previous</span>
+            Wireshark入门
+            </a>
+        
+        
+        
+    </nav>
+    
+</div>
+ 
+<div class="container">
+    
+    <div class="disqus-container">
+    
+</div>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (DISQUS) {
+            DISQUS.reset({
+                reload: true
+            })
+        }
+    })
+</script>
+
+</div>
+
+</main>
+
+
+        </main>
+        <footer class="footer flex">
+    <section class="container">
+        <nav class="footer-links">
+            
+            <a href="/index.xml">RSS</a>
+            
+        </nav>
+
+        
+    </section>
+    <script defer src="/ts/features.dd8e5b18a6dda91367e396fd8dc9b9f83a1993065f709a53e056e0f2e9096ea1.js" 
+    data-enable-footnotes="true"
+    ></script>
+</footer>
+
+    </body>
+</html>

@@ -21,7 +21,7 @@ ICMP [1]依靠IP来完成它的任务，它是IP的主要部分。它与传输�
     </item>
     
     <item>
-      <title>minikube install</title>
+      <title>Minikube 安装过程</title>
       <link>https://byzze.github.io/post/minikube/</link>
       <pubDate>Fri, 13 Jan 2023 00:00:00 +0000</pubDate>
       
