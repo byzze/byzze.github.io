@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 24 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://byzze.github.io/categories/math/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Wireshark入门</title>
-      <link>https://byzze.github.io/post/wireshark%E5%85%A5%E9%97%A8/</link>
+      <link>https://byzze.github.io/post/wireshark/</link>
       <pubDate>Wed, 24 May 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://byzze.github.io/post/wireshark%E5%85%A5%E9%97%A8/</guid>
+      <guid>https://byzze.github.io/post/wireshark/</guid>
       <description>入门记录 使用https无法抓取请求：https://blog.51cto.com/u_15672212/5383275 使用教程：https://www.cnblogs.com/mq0036/p/11187138.html
 数据包详细信息 TCP包详细信息 Wireshark 存在两种过滤器 1）抓包过滤器 2）显示过滤器
 使用过滤器加上过滤字段提取我们想要数据 TCP三次握手 icmp 互联网控制消息协议（英语：Internet Control Message Protocol，缩写：ICMP）是互联网协议族的核心协议之一。它用于网际协议（IP）中发送控制消息，提供可能发生在通信环境中的各种问题反馈。通过这些信息，使管理者可以对所发生的问题作出诊断，然后采取适当的措施解决。
