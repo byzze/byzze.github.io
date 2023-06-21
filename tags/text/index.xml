@@ -13,7 +13,7 @@
       <pubDate>Thu, 04 May 2023 00:00:00 +0000</pubDate>
       
       <guid>https://byzze.github.io/post/go-callvis/</guid>
-      <description>https://github.com/ofabry/go-callvis 与链路追踪（Tracing）不同，Tracing关注复杂的分布式环境中各个服务节点间的调用关系，主要用于服务治理。而我们本次探索的代码调用链路则是代码方法级别的调用关系，主要用于代码设计。 可视化工具可以将代码间的调用关系通过图表的方式展示出来，如下图（来自go-callvis工具） 示例 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 package main import ( &amp;#34;flag&amp;#34; &amp;#34;log&amp;#34; &amp;#34;math/rand&amp;#34; &amp;#34;os&amp;#34; &amp;#34;runtime/pprof&amp;#34; ) var cpuprofile = flag.</description>
+      <description>go-callvis 与链路追踪（Tracing）不同，Tracing主要关注复杂的是分布式环境中各个服务节点间的调用关系，主要用于服务治理。而我们本次探索的代码调用链路则是代码方法级别的调用关系，主要用于代码设计。 可视化工具可以将代码间的调用关系通过图表的方式展示出来，如下图: 来自go-callvis工具 示例 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 package main import ( &amp;#34;flag&amp;#34; &amp;#34;log&amp;#34; &amp;#34;math/rand&amp;#34; &amp;#34;os&amp;#34; &amp;#34;runtime/pprof&amp;#34; ) var cpuprofile = flag.</description>
     </item>
     
     <item>
