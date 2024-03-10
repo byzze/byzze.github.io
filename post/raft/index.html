@@ -62,7 +62,7 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     
-    <link rel="stylesheet" href="/sass/main.min.025aa48bdfc11d4031bca69d66f534d1b6874ba6a9ddaddbbe75e090b28bb672.css">
+    <link rel="stylesheet" href="/sass/main.min.ab99ff095f832511e24ffb2fba2b51ad473b2f7e9301d674eba2c6c3a6e8bd81.css">
     
 </head>
     
@@ -341,7 +341,7 @@
 <ol>
 <li>选举Leader时，采用了随机超时时间控制，先超时的先进入Candidate竞选Leader，但是如果出现了相同时间进入Candidate，且获取的选票一致时，则会重新进入竞选状态。</li>
 <li>选举倒计时timeout通常是 150ms ~ 300ms 直接的某个随机值</li>
-<li>在集群中如果出现了脑裂问题时，出现了网络分区，会出现多个Leader，但是由于分区导致始终有一个Leader所在的分区节点数占大部分，其余Leader所在节点处于小部分，从而导致处于小部分节点分区的Leader得不到大部分节点的ACK响应，数据无法正常Commit。直到网络正常时，多个Leader出现的时候，对比他们的term即任期（上面的步长），新的为Leader，之前小部分Leader未提交的数据则都会被舍弃，关于为什么要舍弃这些数据，需要使用CAP理论解释。</li>
+<li>在集群中如果出现了脑裂问题时，产生了多个网络分区，出现多个Leader，使得分区始终有一个Leader所在的分区节点数占大部分，其余Leader所在节点处于小部分，从而导致处于小部分节点分区的Leader得不到大部分节点的ACK响应，数据无法正常Commit。直到网络正常时，多个Leader出现的时候，对比他们的term即任期（上面的步长），新的为Leader，之前小部分Leader未提交的数据则都会被舍弃，关于为什么要舍弃这些数据，需要使用CAP理论解释。</li>
 <li>数据的流向只能从 Leader 节点向 Follower 节点转移</li>
 <li>数据在大多数节点提交后才commit，并向客户端响应成功</li>
 </ol>
@@ -408,7 +408,7 @@
 
         
     </section>
-    <script defer src="/ts/features.dd8e5b18a6dda91367e396fd8dc9b9f83a1993065f709a53e056e0f2e9096ea1.js"
+    <script defer src="/ts/features.aeccc1b543daef772e7584f28d3bc3e21c62dfd259256c435908dbe148b24c6c.js"
         data-enable-footnotes="true"></script>
 </footer>
     </body>

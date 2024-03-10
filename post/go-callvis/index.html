@@ -66,7 +66,7 @@
 
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     
-    <link rel="stylesheet" href="/sass/main.min.025aa48bdfc11d4031bca69d66f534d1b6874ba6a9ddaddbbe75e090b28bb672.css">
+    <link rel="stylesheet" href="/sass/main.min.ab99ff095f832511e24ffb2fba2b51ad473b2f7e9301d674eba2c6c3a6e8bd81.css">
     
 </head>
     
@@ -240,64 +240,64 @@
 </span><span class="lnt">57
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">(</span>
-</span></span><span class="line"><span class="cl">	<span class="s">&#34;flag&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="s">&#34;log&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="s">&#34;math/rand&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="s">&#34;os&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="s">&#34;runtime/pprof&#34;</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">cpuprofile</span> <span class="p">=</span> <span class="nx">flag</span><span class="p">.</span><span class="nf">Bool</span><span class="p">(</span><span class="s">&#34;cpu&#34;</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="s">&#34;write cpu profile to file&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">memprofile</span> <span class="p">=</span> <span class="nx">flag</span><span class="p">.</span><span class="nf">Bool</span><span class="p">(</span><span class="s">&#34;mem&#34;</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="s">&#34;write cpu profile to file&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">flag</span><span class="p">.</span><span class="nf">Parse</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// 创建cpu分析文件
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="o">*</span><span class="nx">cpuprofile</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">f</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">&#34;./main-cpu.prof&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">			<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">pprof</span><span class="p">.</span><span class="nf">StartCPUProfile</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">		<span class="k">defer</span> <span class="nx">pprof</span><span class="p">.</span><span class="nf">StopCPUProfile</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">	<span class="nf">SimulationAlloc</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="c1">// 创建内存分析文件,放在后面才能采集到内存分配信息
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">if</span> <span class="o">*</span><span class="nx">memprofile</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">f</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">&#34;./main-mem.prof&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">			<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">pprof</span><span class="p">.</span><span class="nf">WriteHeapProfile</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">f</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// SimulationAlloc 模拟分配内存
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">SimulationAlloc</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">s</span> <span class="o">:=</span> <span class="s">&#34;&#34;</span>
-</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="k">for</span> <span class="nx">j</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="p">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">			<span class="nx">s</span> <span class="o">+=</span> <span class="nf">randomString</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nx">s</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">const</span> <span class="nx">letterBytes</span> <span class="p">=</span> <span class="s">&#34;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">randomString</span><span class="p">(</span><span class="nx">n</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="nx">b</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">b</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="nx">b</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span> <span class="nx">letterBytes</span><span class="p">[</span><span class="nx">rand</span><span class="p">.</span><span class="nf">Intn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nx">letterBytes</span><span class="p">))]</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="nb">string</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-Go" data-lang="Go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;flag&#34;</span>
+	<span class="s">&#34;log&#34;</span>
+	<span class="s">&#34;math/rand&#34;</span>
+	<span class="s">&#34;os&#34;</span>
+	<span class="s">&#34;runtime/pprof&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">var</span> <span class="nx">cpuprofile</span> <span class="p">=</span> <span class="nx">flag</span><span class="p">.</span><span class="nf">Bool</span><span class="p">(</span><span class="s">&#34;cpu&#34;</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="s">&#34;write cpu profile to file&#34;</span><span class="p">)</span>
+<span class="kd">var</span> <span class="nx">memprofile</span> <span class="p">=</span> <span class="nx">flag</span><span class="p">.</span><span class="nf">Bool</span><span class="p">(</span><span class="s">&#34;mem&#34;</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="s">&#34;write cpu profile to file&#34;</span><span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">flag</span><span class="p">.</span><span class="nf">Parse</span><span class="p">()</span>
+	<span class="c1">// 创建cpu分析文件
+</span><span class="c1"></span>	<span class="k">if</span> <span class="o">*</span><span class="nx">cpuprofile</span> <span class="p">{</span>
+		<span class="nx">f</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">&#34;./main-cpu.prof&#34;</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+		<span class="p">}</span>
+		<span class="nx">pprof</span><span class="p">.</span><span class="nf">StartCPUProfile</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span>
+		<span class="k">defer</span> <span class="nx">pprof</span><span class="p">.</span><span class="nf">StopCPUProfile</span><span class="p">()</span>
+	<span class="p">}</span>
+
+	<span class="nf">SimulationAlloc</span><span class="p">()</span>
+	<span class="c1">// 创建内存分析文件,放在后面才能采集到内存分配信息
+</span><span class="c1"></span>	<span class="k">if</span> <span class="o">*</span><span class="nx">memprofile</span> <span class="p">{</span>
+		<span class="nx">f</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">os</span><span class="p">.</span><span class="nf">Create</span><span class="p">(</span><span class="s">&#34;./main-mem.prof&#34;</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">log</span><span class="p">.</span><span class="nf">Fatal</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+		<span class="p">}</span>
+		<span class="nx">pprof</span><span class="p">.</span><span class="nf">WriteHeapProfile</span><span class="p">(</span><span class="nx">f</span><span class="p">)</span>
+		<span class="nx">f</span><span class="p">.</span><span class="nf">Close</span><span class="p">()</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// SimulationAlloc 模拟分配内存
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">SimulationAlloc</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+	<span class="nx">s</span> <span class="o">:=</span> <span class="s">&#34;&#34;</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="mi">100</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+		<span class="k">for</span> <span class="nx">j</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="p">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span> <span class="p">{</span>
+			<span class="nx">s</span> <span class="o">+=</span> <span class="nf">randomString</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">s</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">letterBytes</span> <span class="p">=</span> <span class="s">&#34;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#34;</span>
+
+<span class="kd">func</span> <span class="nf">randomString</span><span class="p">(</span><span class="nx">n</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+	<span class="nx">b</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">byte</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span>
+	<span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">b</span> <span class="p">{</span>
+		<span class="nx">b</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="p">=</span> <span class="nx">letterBytes</span><span class="p">[</span><span class="nx">rand</span><span class="p">.</span><span class="nf">Intn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nx">letterBytes</span><span class="p">))]</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nb">string</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><pre tabindex="0"><code>执行命令会出现host地址,浏览器打开即可显示
 go-callvis main.go 
@@ -328,20 +328,20 @@ go-callvis -tests /pacpage
         启用缓存以避免不必要的重现
     	Enable caching to avoid unnecessary re-rendering.
   -focus string
-        使用指定报名或导入路径 (默认 &#34;main&#34;)
-    	Focus specific package using name or import path. (default &#34;main&#34;)
+        使用指定报名或导入路径 (默认 &quot;main&quot;)
+    	Focus specific package using name or import path. (default &quot;main&quot;)
   -format string
-        输出文件格式[svg | png | jpg | ...] (默认 &#34;svg&#34;)
-    	output file format [svg | png | jpg | ...] (default &#34;svg&#34;)
+        输出文件格式[svg | png | jpg | ...] (默认 &quot;svg&quot;)
+    	output file format [svg | png | jpg | ...] (default &quot;svg&quot;)
   -graphviz
         使用Graphviz dot 程序渲染图片
-    	Use Graphviz&#39;s dot program to render images.
+    	Use Graphviz's dot program to render images.
   -group string
-        按包和/或类型 [pkg, type] 对函数进行分组（以逗号分隔）（默认为 &#34;pkg&#34;）
-    	Grouping functions by packages and/or types [pkg, type] (separated by comma) (default &#34;pkg&#34;)
+        按包和/或类型 [pkg, type] 对函数进行分组（以逗号分隔）（默认为 &quot;pkg&quot;）
+    	Grouping functions by packages and/or types [pkg, type] (separated by comma) (default &quot;pkg&quot;)
   -http string
-        HTTP 服务地址 （默认 &#34;:7878&#34;）
-    	HTTP service address. (default &#34;:7878&#34;)
+        HTTP 服务地址 （默认 &quot;:7878&quot;）
+    	HTTP service address. (default &quot;:7878&quot;)
   -ignore string
         忽略包含给定前缀的包路径（以逗号分隔）
     	Ignore package paths containing given prefixes (separated by comma)
@@ -364,8 +364,8 @@ go-callvis -tests /pacpage
         省略对标准库中包的调用/来自包的调用。
     	Omit calls to/from packages in standard library.
   -rankdir
-        图形布局的方向 [LR | RL | TB | BT] (默认 &#34;LR&#34;)
-        Direction of graph layout [LR | RL | TB | BT] (default &#34;LR&#34;)
+        图形布局的方向 [LR | RL | TB | BT] (默认 &quot;LR&quot;)
+        Direction of graph layout [LR | RL | TB | BT] (default &quot;LR&quot;)
   -skipbrowser
         跳过打开浏览器。
     	Skip opening browser.
@@ -434,7 +434,7 @@ go-callvis -tests /pacpage
 
         
     </section>
-    <script defer src="/ts/features.dd8e5b18a6dda91367e396fd8dc9b9f83a1993065f709a53e056e0f2e9096ea1.js"
+    <script defer src="/ts/features.aeccc1b543daef772e7584f28d3bc3e21c62dfd259256c435908dbe148b24c6c.js"
         data-enable-footnotes="true"></script>
 </footer>
     </body>
